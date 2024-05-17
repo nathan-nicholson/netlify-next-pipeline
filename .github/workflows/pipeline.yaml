@@ -1,0 +1,34 @@
+name: Example Netlify Pipeline
+on:
+  push:
+    branches:
+    - main
+jobs:
+  pipeline:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    env:
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }} # Your token should be stored in GitHub Secrets
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }} # Your site ID should be stored in GitHub Secrets
+    steps:
+      - uses: actions/checkout@v4
+        name: Checkout repository
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install
+      - name: Build for Netlify
+        run: netlify build
+      - name: Deploy to Netlify
+        run: |
+          run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          netlify deploy --json --message="$run_url" > deploy.json
+          deploy_url=$(node -p 'require("./deploy.json").deploy_url')
+          logs=$(node -p 'require("./deploy.json").logs')
+          echo "Deploy: $logs"
+          echo "BASE_URL=$deploy_url" >> "$GITHUB_ENV"
+      - name: Run tests
+        run: npm test
+    outputs:
+      job_status: ${{ job.status }}
