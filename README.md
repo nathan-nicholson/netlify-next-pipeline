@@ -1,20 +1,16 @@
-# Next.js on Netlify Platform Starter
+# Nathan's Next.js on Netlify Platform Starter
 
-[Live Demo](https://nextjs-platform-starter.netlify.app/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/02ec8e71-b01b-49a2-88f9-70e018945df2/deploy-status)](https://app.netlify.com/sites/netlify-next-pipeline-example/deploys)
 
 A modern starter based on Next.js 14 (App Router), Tailwind, daisyUI, and [Netlify Core Primitives](https://docs.netlify.com/core/overview/#develop) (Edge Functions, Image CDN, Blob Store).
 
-In this site, Netlify Core Primitives are used both implictly for running Next.js features (e.g. Route Handlers, image optimization via `next/image`, and more) and also explicitly by the user code. 
+In this site, Netlify Core Primitives are used both implictly for running Next.js features (e.g. Route Handlers, image optimization via `next/image`, and more) and also explicitly by the user code.
 
 Implicit usage means you're using any Next.js functionality and everything "just works" when deployed - all the plumbing is done for you. Explicit usage is framework-agnostic and typically provides more features than what Next.js exposes.
 
 ## Deploying to Netlify
 
-This site requires [Netlify Next Runtime v5](https://docs.netlify.com/frameworks/next-js/overview/) for full functionality. That version is now being gradually rolled out to all Netlify accounts. 
-
-After deploying via the button below, please visit the **Site Overview** page for your new site to check whether it is already using the v5 runtime. If not, you'll be prompted to opt-in to to v5.
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-platform-starter)
+This repo uses a GitHub Actions workflow and the Netlify CLI to build and deploy to Netlify instead of leveraging Netlify's continuous deployment functionality. This can be helpful for orchestrating other build steps or for more complex deployment workflows.
 
 ## Developing Locally
 
@@ -39,5 +35,3 @@ netlify dev
 ```
 
 If your browser doesn't navigate to the site automatically, visit [localhost:8888](http://localhost:8888).
-
-
