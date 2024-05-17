@@ -17,13 +17,13 @@ jobs:
         with:
           node-version: 20
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Build for Netlify
         run: netlify build
       - name: Deploy to Netlify
         run: |
           run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          netlify deploy --json --message="$run_url" > deploy.json
+          netlify deploy --prod --json --message="$run_url" > deploy.json
           deploy_url=$(node -p 'require("./deploy.json").deploy_url')
           logs=$(node -p 'require("./deploy.json").logs')
           echo "Deploy: $logs"
