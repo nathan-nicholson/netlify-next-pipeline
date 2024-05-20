@@ -23,7 +23,7 @@ jobs:
       - name: Deploy to Netlify
         run: |
           run_url="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          netlify deploy --prod --json --message="$run_url" > deploy.json
+          netlify deploy --functions=netlify/edge-functions --prod --json --message="$run_url" > deploy.json
           deploy_url=$(node -p 'require("./deploy.json").deploy_url')
           logs=$(node -p 'require("./deploy.json").logs')
           echo "Deploy: $logs"
